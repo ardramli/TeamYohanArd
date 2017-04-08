@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D384CDD1E98AFCD00456CA4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D384CDC1E98AFCD00456CA4 /* User.swift */; };
+		3D384CDF1E98B23700456CA4 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D384CDE1E98B23700456CA4 /* UserTableViewCell.swift */; };
+		3D384CE11E98B80F00456CA4 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D384CE01E98B80F00456CA4 /* ContentViewController.swift */; };
 		4D6144C760CCD91C1BB1A427 /* Pods_TeamYohanArd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC464B40E8A0C4AF2722DA7 /* Pods_TeamYohanArd.framework */; };
 		CE1891B01E9781630019AF11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1891AF1E9781630019AF11 /* AppDelegate.swift */; };
 		CE1891B21E9781640019AF11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1891B11E9781640019AF11 /* ViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D384CDC1E98AFCD00456CA4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		3D384CDE1E98B23700456CA4 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		3D384CE01E98B80F00456CA4 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		79B8368439B0133AECBE02D9 /* Pods-TeamYohanArd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamYohanArd.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamYohanArd/Pods-TeamYohanArd.release.xcconfig"; sourceTree = "<group>"; };
 		AF38580EEEB3528B3F192A4D /* Pods-TeamYohanArd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamYohanArd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamYohanArd/Pods-TeamYohanArd.debug.xcconfig"; sourceTree = "<group>"; };
 		CAC464B40E8A0C4AF2722DA7 /* Pods_TeamYohanArd.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamYohanArd.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,9 +86,12 @@
 		CE1891AE1E9781630019AF11 /* TeamYohanArd */ = {
 			isa = PBXGroup;
 			children = (
+				3D384CDC1E98AFCD00456CA4 /* User.swift */,
 				CE1891AF1E9781630019AF11 /* AppDelegate.swift */,
 				CE1891B11E9781640019AF11 /* ViewController.swift */,
+				3D384CDE1E98B23700456CA4 /* UserTableViewCell.swift */,
 				CE1891B31E9781640019AF11 /* Main.storyboard */,
+				3D384CE01E98B80F00456CA4 /* ContentViewController.swift */,
 				CE1891B61E9781640019AF11 /* Assets.xcassets */,
 				CE1891B81E9781640019AF11 /* LaunchScreen.storyboard */,
 				CE1891BB1E9781640019AF11 /* Info.plist */,
@@ -215,8 +224,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D384CE11E98B80F00456CA4 /* ContentViewController.swift in Sources */,
+				3D384CDF1E98B23700456CA4 /* UserTableViewCell.swift in Sources */,
 				CE1891B21E9781640019AF11 /* ViewController.swift in Sources */,
 				CE1891B01E9781630019AF11 /* AppDelegate.swift in Sources */,
+				3D384CDD1E98AFCD00456CA4 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +392,7 @@
 				CE1891C01E9781640019AF11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

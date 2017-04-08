@@ -10,15 +10,15 @@ import Foundation
 
 class User {
     var name : String
-    var picture : Image
+//    var image = UIImage
     
     init () {
         name = ""
-        picture = #imageLiteral(resourceName: "dictionary")
+//        image = #imageLiteral(resourceName: "dictionary")
     }
     
-    init (aName : String, aPicture :Image) {
+    init (aName : String /*, anImage :UIImage*/) {
         name = aName
-        picture = aPicture
+//        image = anImage
     }
 }
