@@ -10,19 +10,20 @@ import Foundation
 
 class Message {
     
-    var id : Int
-    var name : String
+    var fromId : Int
+    var toId : Int
     var text : String
     
     init () {
-        id = 0
-        name = ""
+        fromId = 0
+        toId = 0
         text = ""
     }
     
-    init (anId : Int , aName : String , aText : String) {
-        id = anId
-        name = aName
+    init (afromId : Int, atoId : Int,  aText : String) {
+        fromId = afromId
         text = aText
+        toId = atoId
+        
     }
 }

@@ -33,11 +33,11 @@ class ViewController: UIViewController {
     
     
     func listenToFirebase () {
-        ref.child("messages").observe(.childMoved, with: { (snapshot) in print ( "Moved :" , snapshot)
+        ref.child("users").observe(.childMoved, with: { (snapshot) in print ( "Moved :" , snapshot)
         
         })
         
-        ref.child("messages").observe(.childChanged, with: { (snapshot) in print ( "Changed :" , snapshot)
+        ref.child("users").observe(.childChanged, with: { (snapshot) in print ( "Changed :" , snapshot)
             
             guard let info = snapshot.value as? NSDictionary,
                 let messageId = Int(snapshot.key)
@@ -61,12 +61,12 @@ class ViewController: UIViewController {
             
         })
         
-        ref.child("messages").observe(.childAdded, with: { (snapshot) in print ( "Added :" , snapshot)
+        ref.child("users").observe(.childAdded, with: { (snapshot) in print ( "Added :" , snapshot)
             
             guard let info = snapshot.value as? NSDictionary
                 else {return}
             
-            self.addMessageToArray(id: snapshot.key, messageInfo: info)
+            self.addUserToArray(id: snapshot.key, userInfo: info)
             
             self.users.sort(by: { (ard, yohan) -> Bool in
                 return ard.id < yohan.id
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
             
         })
         
-        ref.child("messages").observe(.childRemoved, with: { (snapshot) in print ( "Removed :" , snapshot)
+        ref.child("users").observe(.childRemoved, with: { (snapshot) in print ( "Removed :" , snapshot)
             
             guard let deletedId = Int(snapshot.key)
                 else { return }
@@ -102,9 +102,9 @@ class ViewController: UIViewController {
     }
 
     
-    func addMessageToArray (id : Any , messageInfo : NSDictionary) {
-        if  let name = messageInfo ["name"] as? String,
-            let text = messageInfo ["text"] as? String,
+    func addUserToArray (id : Any , userInfo : NSDictionary) {
+        if  let name = userInfo ["name"] as? String,
+            let text = userInfo ["text"] as? String,
             let id = id as? String {
             let currentId = Int(id)
             
@@ -130,6 +130,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         let currentUser = users [indexPath.row]
         cell.nameLabel.text = currentUser.name
+        cell.messageLabel.text = currentUser.text
         print("User :",currentUser.name)
         //cell.userImage.image = currentUser.image
         //here is the place to implement the code to show a bit of the latest message received
