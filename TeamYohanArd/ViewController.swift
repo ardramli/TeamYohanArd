@@ -15,6 +15,10 @@ class ViewController: UIViewController {
         var ref: FIRDatabaseReference!
     
         var users : [User] = []
+    
+        var currentUser : String = ""
+    
+        var lastId : Int = 0
 
     
     override func viewDidLoad() {
@@ -45,10 +49,21 @@ class ViewController: UIViewController {
         
         ref.child("yourPath").observe(.childRemoved, with: { (snapshot) in print ( "Removed :" , snapshot)
             
+            guard let deletedId = Int(snapshot.key)
+                else { return }
+            
+            if let deletedIndex = self.users.index (where : { (std) -> Bool in
+                return std.id == deletedId
+            }) {
+                self.students.remove(at: deletedIndex)
+                let indexPath = IndexPath(row: deletedIndex, section: 0)
+                self.studentTableView.deleteRows(at: [indexPath], with: .right)
+            }
         })
-        
+            
     //End of listenToFirebase
     }
+       
 
 
 //End of ViewController Class
