@@ -15,7 +15,7 @@ class ContentViewController: UIViewController {
 
     var ref: FIRDatabaseReference!
     
-    var messages : [Message] = []
+    
     
     @IBAction func sendButton(_ sender: Any) {
         if let message = messageTextField.text {
@@ -31,6 +31,7 @@ class ContentViewController: UIViewController {
     //End of sendButton
     }
     
+<<<<<<< HEAD
     func addMessageToArray (id : Any , messageInfo : NSDictionary) {
         if  let name = messageInfo ["name"] as? String,
             let text = messageInfo ["text"] as? String {
@@ -39,6 +40,9 @@ class ContentViewController: UIViewController {
             self.messages.append(newMessage)
         }
     }
+=======
+    
+>>>>>>> c69400fa1bc3a42e55535097e002bc6ce45ceac0
     
     
     override func viewDidLoad() {
