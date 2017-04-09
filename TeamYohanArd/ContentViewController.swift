@@ -9,21 +9,25 @@
 import UIKit
 import FirebaseDatabase
 
+
+
 class ContentViewController: UIViewController {
-    @IBOutlet weak var masageTableView: UITableView!
+    @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
 
     var ref: FIRDatabaseReference!
     
+    var messages : [Message] = []
     
+    var lastMessageId : Int = 2
     
     @IBAction func sendButton(_ sender: Any) {
         if let message = messageTextField.text {
-            print("id : \(lastId)")
-            lastId = chatId + 1
+            print("id : \(lastMessageId)")
+            lastMessageId = lastMessageId + 1
             
-            let post : [String : Any] = ["chatText" : chatText]
-            ref.child("message").child("\(chatId)").updateChildValues(post)
+            let post : [String : Any] = ["chatText" : message]
+            ref.child("messages").child("\(lastMessageId)").updateChildValues(post)
         }
         else {
             print("Error updating chat")
@@ -31,19 +35,15 @@ class ContentViewController: UIViewController {
     //End of sendButton
     }
     
-<<<<<<< HEAD
+
     func addMessageToArray (id : Any , messageInfo : NSDictionary) {
         if  let name = messageInfo ["name"] as? String,
             let text = messageInfo ["text"] as? String {
             
-            let newMessage = Message (anId: id as! String, aName: name, aText: text)
+            let newMessage = Message (anId: id as! Int, aName: name, aText: text)
             self.messages.append(newMessage)
         }
     }
-=======
-    
->>>>>>> c69400fa1bc3a42e55535097e002bc6ce45ceac0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

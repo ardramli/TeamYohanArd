@@ -13,16 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
 
         var ref: FIRDatabaseReference!
+    
         var lastId : Int = 2
         var users : [User] = []
-<<<<<<< HEAD
-    
         var currentUser : String = ""
-    
-        var lastId : Int = 0
-=======
-        var messages : [Message] = []
->>>>>>> c69400fa1bc3a42e55535097e002bc6ce45ceac0
 
     
     override func viewDidLoad() {
@@ -54,10 +48,10 @@ class ViewController: UIViewController {
                 let name = info["name"] as? String
                 else {return}
             
-            if let matchedIndex = self.messages.index(where: {(messageElement) -> Bool in
+            if let matchedIndex = self.users.index(where: {(messageElement) -> Bool in
                 return messageElement.id == messageId
             }){
-                let changedMessage = self.messages[matchedIndex]
+                let changedMessage = self.users[matchedIndex]
                 changedMessage.name = name
                 changedMessage.text = text
                 let indexPath = IndexPath(row: matchedIndex, section: 0)
@@ -85,8 +79,8 @@ class ViewController: UIViewController {
             self.userTableView.reloadData()
             
             
-            let index = IndexPath(item: self.users.count, section: 0)
-            self.userTableView.insertRows(at: [index], with: .left)
+//            let index = IndexPath(item: self.users.count, section: 0)
+//            self.userTableView.insertRows(at: [index], with: .left)
             
         })
         
@@ -98,27 +92,26 @@ class ViewController: UIViewController {
             if let deletedIndex = self.users.index (where : { (std) -> Bool in
                 return std.id == deletedId
             }) {
-                self.students.remove(at: deletedIndex)
+                self.users.remove(at: deletedIndex)
                 let indexPath = IndexPath(row: deletedIndex, section: 0)
-                self.studentTableView.deleteRows(at: [indexPath], with: .right)
+                self.userTableView.deleteRows(at: [indexPath], with: .right)
             }
         })
             
     //End of listenToFirebase
     }
-<<<<<<< HEAD
-       
-=======
+
     
     func addMessageToArray (id : Any , messageInfo : NSDictionary) {
         if  let name = messageInfo ["name"] as? String,
-            let text = messageInfo ["text"] as? String {
+            let text = messageInfo ["text"] as? String,
+            let id = id as? String {
+            let currentId = Int(id)
             
-            let newMessage = Message (anId: id as! Int, aName: name, aText: text)
-            self.messages.append(newMessage)
+            let newUser = User (aName: name, anId: currentId!, aText: text)
+            self.users.append(newUser)
         }
     }
->>>>>>> c69400fa1bc3a42e55535097e002bc6ce45ceac0
 
 
 //End of ViewController Class
@@ -137,6 +130,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         let currentUser = users [indexPath.row]
         cell.nameLabel.text = currentUser.name
+        print("User :",currentUser.name)
         //cell.userImage.image = currentUser.image
         //here is the place to implement the code to show a bit of the latest message received
         
