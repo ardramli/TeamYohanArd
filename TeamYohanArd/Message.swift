@@ -9,15 +9,19 @@
 import Foundation
 
 class Message {
+    
+    var id : Int
     var name : String
     var text : String
     
     init () {
+        id = 0
         name = ""
         text = ""
     }
     
-    init (aName : String , aText : String) {
+    init (anId : Int, aName : String , aText : String) {
+        id = anId
         name = aName
         text = aText
     }
