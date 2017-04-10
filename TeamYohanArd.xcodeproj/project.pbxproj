@@ -18,7 +18,10 @@
 		CE1891B71E9781640019AF11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE1891B61E9781640019AF11 /* Assets.xcassets */; };
 		CE1891BA1E9781640019AF11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1891B81E9781640019AF11 /* LaunchScreen.storyboard */; };
 		CE1891C21E978C270019AF11 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE1891C11E978C270019AF11 /* GoogleService-Info.plist */; };
-		CEE306F31E9A09810027E192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE306F21E9A09810027E192 /* LoginViewController.swift */; };
+		CEB845A91E9B84740050F895 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB845A81E9B84740050F895 /* RegisterViewController.swift */; };
+		CEB845AB1E9B84A60050F895 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB845AA1E9B84A60050F895 /* LogInViewController.swift */; };
+		CEB845AD1E9B88620050F895 /* UsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB845AC1E9B88620050F895 /* UsersListViewController.swift */; };
+		CEB845AF1E9B88CA0050F895 /* UsersListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB845AE1E9B88CA0050F895 /* UsersListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +40,10 @@
 		CE1891B91E9781640019AF11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE1891BB1E9781640019AF11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE1891C11E978C270019AF11 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CEE306F21E9A09810027E192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CEB845A81E9B84740050F895 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		CEB845AA1E9B84A60050F895 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		CEB845AC1E9B88620050F895 /* UsersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListViewController.swift; sourceTree = "<group>"; };
+		CEB845AE1E9B88CA0050F895 /* UsersListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +103,10 @@
 				3D384CE01E98B80F00456CA4 /* ContentViewController.swift */,
 				3D384CDE1E98B23700456CA4 /* UserTableViewCell.swift */,
 				CE1891B31E9781640019AF11 /* Main.storyboard */,
-				CEE306F21E9A09810027E192 /* LoginViewController.swift */,
+				CEB845AE1E9B88CA0050F895 /* UsersListTableViewCell.swift */,
+				CEB845AC1E9B88620050F895 /* UsersListViewController.swift */,
+				CEB845A81E9B84740050F895 /* RegisterViewController.swift */,
+				CEB845AA1E9B84A60050F895 /* LogInViewController.swift */,
 				CE1891B61E9781640019AF11 /* Assets.xcassets */,
 				CE1891B81E9781640019AF11 /* LaunchScreen.storyboard */,
 				CE1891BB1E9781640019AF11 /* Info.plist */,
@@ -230,10 +239,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE306F31E9A09810027E192 /* LoginViewController.swift in Sources */,
+				CEB845AF1E9B88CA0050F895 /* UsersListTableViewCell.swift in Sources */,
 				3D384CE11E98B80F00456CA4 /* ContentViewController.swift in Sources */,
 				3D384CDF1E98B23700456CA4 /* UserTableViewCell.swift in Sources */,
+				CEB845A91E9B84740050F895 /* RegisterViewController.swift in Sources */,
 				CE1891B21E9781640019AF11 /* ViewController.swift in Sources */,
+				CEB845AB1E9B84A60050F895 /* LogInViewController.swift in Sources */,
+				CEB845AD1E9B88620050F895 /* UsersListViewController.swift in Sources */,
 				3D7F643E1E9907C9009EB9B2 /* Message.swift in Sources */,
 				CE1891B01E9781630019AF11 /* AppDelegate.swift in Sources */,
 				3D384CDD1E98AFCD00456CA4 /* User.swift in Sources */,
