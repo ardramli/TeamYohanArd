@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class ViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
@@ -29,6 +30,8 @@ class ViewController: UIViewController {
         
         listenToFirebase()
         //End of viewDidLoad
+        
+         print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
     }
     
     
@@ -113,6 +116,26 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            
+            //logged out and go to the log in page
+            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "ToLogInNaviController") {
+                present(logInVC, animated: true, completion: nil)   }
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    @IBAction func startAChatButtonTapped(_ sender: Any) {
+        if let startAChat = storyboard?.instantiateViewController(withIdentifier: "UsersListViewController") {
+            present(startAChat, animated: true, completion: nil)
+        }
+    }
 
 //End of ViewController Class
 }
