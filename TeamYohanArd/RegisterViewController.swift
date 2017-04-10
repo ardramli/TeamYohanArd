@@ -12,6 +12,7 @@ import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
     
+    var users : [Any] = []
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -63,9 +64,11 @@ class RegisterViewController: UIViewController {
             print("User created")
             print("Email : \(user.email)")
             print("uid : \(user.uid)")
-            
+
             let dict : [String : Any] = ["name" :  (self.nameTextField.text) as Any, "text" : "", "imageURL" : ""]
             self.ref.child("Users").child(user.uid).setValue(dict)
+            self.users.append(dict)
+            
             
             //random id = self.ref.childByAutoId()
             

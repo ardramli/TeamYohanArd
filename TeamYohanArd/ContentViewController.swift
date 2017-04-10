@@ -29,7 +29,7 @@ class ContentViewController: UIViewController {
             print("id : \(lastMessageId)")
             lastMessageId = lastMessageId + 1
             
-            let post : [String : Any] = ["chatText" : message]
+            let post : [String : Any] = ["message" : message]
             ref.child("messages").child("\(lastMessageId)").updateChildValues(post)
         }
         else {
@@ -46,7 +46,7 @@ class ContentViewController: UIViewController {
         //
         
         
-        if let text = messageInfo ["chatText"] as? String,
+        if let text = messageInfo ["message"] as? String,
             let messageId = id as? String {
            
             let currentChatId = Int(messageId)

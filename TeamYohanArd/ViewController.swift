@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         var ref: FIRDatabaseReference!
     
         var lastId : Int = 2
-        var users : [User] = []
+        var chats : [User] = []
         var currentUser : String = ""
 
     
@@ -36,11 +36,11 @@ class ViewController: UIViewController {
     
     
     func listenToFirebase () {
-        ref.child("users").observe(.childMoved, with: { (snapshot) in print ( "Moved :" , snapshot)
+        ref.child("chats").observe(.childMoved, with: { (snapshot) in print ( "Moved :" , snapshot)
         
         })
         
-        ref.child("users").observe(.childChanged, with: { (snapshot) in print ( "Changed :" , snapshot)
+        ref.child("chats").observe(.childChanged, with: { (snapshot) in print ( "Changed :" , snapshot)
             
             guard let info = snapshot.value as? NSDictionary,
                 let messageId = Int(snapshot.key)
@@ -51,10 +51,10 @@ class ViewController: UIViewController {
                 let name = info["name"] as? String
                 else {return}
             
-            if let matchedIndex = self.users.index(where: {(messageElement) -> Bool in
+            if let matchedIndex = self.chats.index(where: {(messageElement) -> Bool in
                 return messageElement.id == messageId
             }){
-                let changedMessage = self.users[matchedIndex]
+                let changedMessage = self.chats[matchedIndex]
                 changedMessage.name = name
                 changedMessage.text = text
                 let indexPath = IndexPath(row: matchedIndex, section: 0)
@@ -64,18 +64,18 @@ class ViewController: UIViewController {
             
         })
         
-        ref.child("users").observe(.childAdded, with: { (snapshot) in print ( "Added :" , snapshot)
+        ref.child("chats").observe(.childAdded, with: { (snapshot) in print ( "Added :" , snapshot)
             
             guard let info = snapshot.value as? NSDictionary
                 else {return}
             
             self.addUserToArray(id: snapshot.key, userInfo: info)
             
-            self.users.sort(by: { (ard, yohan) -> Bool in
-                return ard.id < yohan.id
-            })
+//            self.chats.sort(by: { (ard, yohan) -> Bool in
+//                return ard.id < yohan.id
+//            })
             
-            if let lastUser = self.users.last {
+            if let lastUser = self.chats.last {
                 self.lastId = lastUser.id
             }
             
@@ -87,15 +87,15 @@ class ViewController: UIViewController {
             
         })
         
-        ref.child("users").observe(.childRemoved, with: { (snapshot) in print ( "Removed :" , snapshot)
+        ref.child("chats").observe(.childRemoved, with: { (snapshot) in print ( "Removed :" , snapshot)
             
             guard let deletedId = Int(snapshot.key)
                 else { return }
             
-            if let deletedIndex = self.users.index (where : { (std) -> Bool in
+            if let deletedIndex = self.chats.index (where : { (std) -> Bool in
                 return std.id == deletedId
             }) {
-                self.users.remove(at: deletedIndex)
+                self.chats.remove(at: deletedIndex)
                 let indexPath = IndexPath(row: deletedIndex, section: 0)
                 self.userTableView.deleteRows(at: [indexPath], with: .right)
             }
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
             
             let currentId = Int(id)
             let newUser = User (aName: name, anId: currentId!, aText: text)
-            self.users.append(newUser)
+            self.chats.append(newUser)
         }
     }
 
@@ -144,14 +144,14 @@ class ViewController: UIViewController {
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return chats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserTableViewCell
             else {return UITableViewCell () }
         
-        let currentUser = users [indexPath.row]
+        let currentUser = chats [indexPath.row]
         cell.nameLabel.text = currentUser.name
         cell.messageLabel.text = currentUser.text
         print("User :",currentUser.name)
@@ -173,7 +173,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
 // End of extention
 }
 
-
+//change User.swift to Chat
 
 
 
