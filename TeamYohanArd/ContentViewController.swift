@@ -40,11 +40,14 @@ class ContentViewController: UIViewController {
     
 
     func addMessageToArray (id : Any , messageInfo : NSDictionary) {
-        if let text = messageInfo ["chatText"] as? String,
-            let fromId = messageInfo ["fromId"] as? Int,
-            let toId = messageInfo ["toId"] as? Int{
+        
+        //let fromId = messageInfo ["fromId"] as? Int,
+        //let toId = messageInfo ["toId"] as? Int,
+        //let id = id as? Int
+        
+        if let text = messageInfo ["chatText"] as? String {
             
-            let newMessage = Message (afromId: fromUserId, atoId: toUserId, aText: text)
+            let newMessage = Message(afromId: 0, atoId: 0, aText: text, anId: 0)
             self.messages.append(newMessage)
         }
     }
@@ -54,7 +57,11 @@ class ContentViewController: UIViewController {
         
         ref = FIRDatabase.database().reference()
         
+        messageTableView.delegate = self
+        messageTableView.dataSource = self
+        
         //navigationItem.title = currentUser.name
+        listenToFirebase()
        
     //End of viewDidLoad
     }
@@ -72,14 +79,13 @@ class ContentViewController: UIViewController {
             
             //get the age and name from the "info/ snapshot.value
             guard let text = info["text"] as? String,
-                let name = info["name"] as? String
+                let _ = info["name"] as? String
                 else {return}
             
             if let matchedIndex = self.messages.index(where: {(messageElement) -> Bool in
                 return messageElement.id == messageId
             }){
                 let changedMessage = self.messages[matchedIndex]
-                changedMessage.name = name
                 changedMessage.text = text
                 let indexPath = IndexPath(row: matchedIndex, section: 0)
                 self.messageTableView.reloadRows(at: [indexPath], with: .fade)
@@ -104,8 +110,8 @@ class ContentViewController: UIViewController {
             self.messageTableView.reloadData()
             
             
-            //            let index = IndexPath(item: self.users.count, section: 0)
-            //            self.userTableView.insertRows(at: [index], with: .left)
+            let index = IndexPath(item: self.messages.count, section: 0)
+            self.messageTableView.insertRows(at: [index], with: .left)
             
         })
         
@@ -125,7 +131,6 @@ class ContentViewController: UIViewController {
         
         //End of listenToFirebase
     }
-
     
 //End of ContentViewController
 }
