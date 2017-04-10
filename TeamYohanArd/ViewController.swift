@@ -79,7 +79,7 @@ class ViewController: UIViewController {
             self.userTableView.reloadData()
             
             
-//            let index = IndexPath(item: self.users.count, section: 0)
+//            let index = IndexPath(item: self.users.count - 1, section: 0)
 //            self.userTableView.insertRows(at: [index], with: .left)
             
         })
@@ -106,8 +106,8 @@ class ViewController: UIViewController {
         if  let name = userInfo ["name"] as? String,
             let text = userInfo ["text"] as? String,
             let id = id as? String {
-            let currentId = Int(id)
             
+            let currentId = Int(id)
             let newUser = User (aName: name, anId: currentId!, aText: text)
             self.users.append(newUser)
         }

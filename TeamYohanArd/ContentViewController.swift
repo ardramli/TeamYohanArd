@@ -43,11 +43,14 @@ class ContentViewController: UIViewController {
         
         //let fromId = messageInfo ["fromId"] as? Int,
         //let toId = messageInfo ["toId"] as? Int,
-        //let id = id as? Int
+        //
         
-        if let text = messageInfo ["chatText"] as? String {
-            
-            let newMessage = Message(afromId: 0, atoId: 0, aText: text, anId: 0)
+        
+        if let text = messageInfo ["chatText"] as? String,
+            let messageId = id as? String {
+           
+            let currentChatId = Int(messageId)
+            let newMessage = Message(afromId: 0, atoId: 0, aText: text, anId: currentChatId!)
             self.messages.append(newMessage)
         }
     }
@@ -110,8 +113,8 @@ class ContentViewController: UIViewController {
             self.messageTableView.reloadData()
             
             
-            let index = IndexPath(item: self.messages.count, section: 0)
-            self.messageTableView.insertRows(at: [index], with: .left)
+//            let index = IndexPath(item: self.messages.count, section: 0)
+//            self.messageTableView.insertRows(at: [index], with: .left)
             
         })
         

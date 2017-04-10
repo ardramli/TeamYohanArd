@@ -13,7 +13,7 @@ class User {
     var id : Int
     var text : String
     
-//    var image = UIImage
+//    var image : UIImage
     
     init () {
         name = ""
