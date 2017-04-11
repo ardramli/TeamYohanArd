@@ -8,12 +8,22 @@
 
 import UIKit
 import FirebaseDatabase
-
-
+import FirebaseStorage
 
 class ContentViewController: UIViewController {
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet{
+            tableView.dataSource = self
+            tableView.delegate = self
+        }
+    }
+    @IBOutlet weak var addButton: UIButton! {
+        didSet {
+        addButton.addTarget(self, action: #selector(openImagePicker(_:)), for: .touchUpInside)
+        }
+    }
 
     var ref: FIRDatabaseReference!
     
@@ -135,10 +145,69 @@ class ContentViewController: UIViewController {
         //End of listenToFirebase
     }
     
+    
+    func openImagePicker(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func dismissImagePicker(){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        
+        let ref = FIRStorage.storage().reference()
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        let metaData = FIRStorageMetadata()
+        ref.child("chatImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString {
+                //save to firebase database
+                saveImagePath(downloadPath)
+                
+            }
+            
+        }
+        
+    }
+    
+    let dateFormat : DateFormatter = {
+        let _dateFormatter = DateFormatter()
+        let locale = Locale(identifier: "en_US_POSIX")
+        _dateFormatter.locale = locale
+        _dateFormatter.dateFormat = "yyyy'-'MM'-dd'T'HH':'mm':'ss'Z'"
+        return _dateFormatter
+    }()
+    
+    func saveImagePath(_ path: String) {
+        let dbRef = FIRDatabase.database().reference()
+        
+        let chatValue : [String: Any] = ["name" : "ard",
+                                         "timestamp": dateFormat.string(from: Date()),
+                                         "imageURL": path]
+        dbRef.child("chats").childByAutoId().setValue(chatValue)
+    }
 //End of ContentViewController
 }
 
-
+extension ContentViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        //go to defer whenever exiting the function
+        defer {
+            dismissImagePicker()
+        }
+        
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
+            return
+        }
+        uploadImage(image)
+    }
+}
 
 
 extension ContentViewController : UITableViewDelegate, UITableViewDataSource {
