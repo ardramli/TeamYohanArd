@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 
 class ContentViewController: UIViewController {
     @IBOutlet weak var messageTableView: UITableView!
@@ -60,7 +61,7 @@ class ContentViewController: UIViewController {
             let messageId = id as? String {
            
             let currentChatId = Int(messageId)
-            let newMessage = Message(afromId: 0, atoId: 0, aText: text, anId: currentChatId!)
+            let newMessage = Message()
             self.messages.append(newMessage)
         }
     }
@@ -75,6 +76,12 @@ class ContentViewController: UIViewController {
         
         //navigationItem.title = currentUser.name
         listenToFirebase()
+        
+        
+        
+        
+        
+        
        
     //End of viewDidLoad
     }
@@ -166,7 +173,7 @@ class ContentViewController: UIViewController {
             
             if let downloadPath = meta?.downloadURL()?.absoluteString {
                 //save to firebase database
-                saveImagePath(downloadPath)
+                self.saveImagePath(downloadPath)
                 
             }
             

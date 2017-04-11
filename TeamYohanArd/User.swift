@@ -10,22 +10,18 @@ import Foundation
 
 class User {
     var name : String
-    var id : Int
-    var text : String
-    
-//    var image : UIImage
+    var imageURL : String
+//    var uid : String
     
     init () {
         name = ""
-        id = 0
-        text = ""
-//        image = #imageLiteral(resourceName: "dictionary")
+        imageURL = ""
+//        uid = ""
     }
     
-    init (aName : String , anId : Int , aText : String/*, anImage :UIImage*/) {
+    init (aName : String , anImageURL : String /*, anUid : String*/) {
         name = aName
-        id = anId
-        text = aText
-//        image = anImage
+        imageURL = anImageURL
+//        uid = anUid
     }
 }

@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         var ref: FIRDatabaseReference!
     
         var lastId : Int = 2
-        var chats : [User] = []
+        var chats : [Chat] = []
         var currentUser : String = ""
 
     
@@ -47,8 +47,7 @@ class ViewController: UIViewController {
                 else {return}
             
             //get the age and name from the "info/ snapshot.value
-            guard let text = info["text"] as? String,
-                let name = info["name"] as? String
+                guard let name = info["name"] as? String
                 else {return}
             
             if let matchedIndex = self.chats.index(where: {(messageElement) -> Bool in
@@ -56,7 +55,6 @@ class ViewController: UIViewController {
             }){
                 let changedMessage = self.chats[matchedIndex]
                 changedMessage.name = name
-                changedMessage.text = text
                 let indexPath = IndexPath(row: matchedIndex, section: 0)
                 self.userTableView.reloadRows(at: [indexPath], with: .fade)
                 
@@ -70,10 +68,6 @@ class ViewController: UIViewController {
                 else {return}
             
             self.addUserToArray(id: snapshot.key, userInfo: info)
-            
-//            self.chats.sort(by: { (ard, yohan) -> Bool in
-//                return ard.id < yohan.id
-//            })
             
             if let lastUser = self.chats.last {
                 self.lastId = lastUser.id
@@ -107,12 +101,11 @@ class ViewController: UIViewController {
     
     func addUserToArray (id : Any , userInfo : NSDictionary) {
         if  let name = userInfo ["name"] as? String,
-            let text = userInfo ["text"] as? String,
             let id = id as? String {
             
             let currentId = Int(id)
-            let newUser = User (aName: name, anId: currentId!, aText: text)
-            self.chats.append(newUser)
+            let newChat = Chat (aName: name, anId: currentId!)
+            self.chats.append(newChat)
         }
     }
 
@@ -133,7 +126,7 @@ class ViewController: UIViewController {
     
     @IBAction func startAChatButtonTapped(_ sender: Any) {
         if let startAChat = storyboard?.instantiateViewController(withIdentifier: "UsersListViewController") {
-            present(startAChat, animated: true, completion: nil)
+            navigationController?.pushViewController(startAChat, animated: true)
         }
     }
 
@@ -153,7 +146,6 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         
         let currentUser = chats [indexPath.row]
         cell.nameLabel.text = currentUser.name
-        cell.messageLabel.text = currentUser.text
         print("User :",currentUser.name)
         //cell.userImage.image = currentUser.image
         //here is the place to implement the code to show a bit of the latest message received

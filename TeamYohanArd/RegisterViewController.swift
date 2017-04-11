@@ -12,8 +12,6 @@ import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
     
-    var users : [Any] = []
-    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -64,13 +62,10 @@ class RegisterViewController: UIViewController {
             print("User created")
             print("Email : \(user.email)")
             print("uid : \(user.uid)")
-
-            let dict : [String : Any] = ["name" :  (self.nameTextField.text) as Any, "text" : "", "imageURL" : ""]
+            
+            //set a new value. when adding we do not need to use arrays
+            let dict : [String : Any] = ["name" :  self.nameTextField.text!]
             self.ref.child("Users").child(user.uid).setValue(dict)
-            self.users.append(dict)
-            
-            
-            //random id = self.ref.childByAutoId()
             
             if let goToViewController = self.storyboard?.instantiateViewController(withIdentifier: "ToViewNaviController") {
                 self.present(goToViewController, animated: true, completion: nil)
