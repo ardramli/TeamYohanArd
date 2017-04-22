@@ -30,6 +30,7 @@
 		3D384CDE1E98B23700456CA4 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		3D384CE01E98B80F00456CA4 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		3D7F643D1E9907C9009EB9B2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3D96001B1E9F7ECD00147ADD /* TeamYohanArd.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamYohanArd.entitlements; sourceTree = "<group>"; };
 		3DCEE1A01E9CB900007FA42A /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		79B8368439B0133AECBE02D9 /* Pods-TeamYohanArd.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamYohanArd.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamYohanArd/Pods-TeamYohanArd.release.xcconfig"; sourceTree = "<group>"; };
 		AF38580EEEB3528B3F192A4D /* Pods-TeamYohanArd.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamYohanArd.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamYohanArd/Pods-TeamYohanArd.debug.xcconfig"; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		CE1891AE1E9781630019AF11 /* TeamYohanArd */ = {
 			isa = PBXGroup;
 			children = (
+				3D96001B1E9F7ECD00147ADD /* TeamYohanArd.entitlements */,
 				3D384CDC1E98AFCD00456CA4 /* User.swift */,
 				3DCEE1A01E9CB900007FA42A /* Chat.swift */,
 				3D7F643D1E9907C9009EB9B2 /* Message.swift */,
@@ -131,6 +133,7 @@
 				CE1891AA1E9781630019AF11 /* Resources */,
 				14E72949580E4AD3ED7C3CE8 /* [CP] Embed Pods Frameworks */,
 				09F2D0FDF48FD90F721E94FC /* [CP] Copy Pods Resources */,
+				3D7E9A121EA06F3F00492761 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -153,7 +156,13 @@
 				TargetAttributes = {
 					CE1891AB1E9781630019AF11 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = ZQ547JDPVM;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -219,6 +228,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamYohanArd/Pods-TeamYohanArd-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		3D7E9A121EA06F3F00492761 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" a858dabfd539372e262e1c8e99e68606a5fb80fb 4f38facf597b34effd1e104d0f2404de8aab474f3c1e4ff98838ccf7a0160fcb ";
 		};
 		7FF06A98D5E09DA118A029A2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -376,10 +398,14 @@
 			baseConfigurationReference = AF38580EEEB3528B3F192A4D /* Pods-TeamYohanArd.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeamYohanArd/TeamYohanArd.entitlements;
+				DEVELOPMENT_TEAM = ZQ547JDPVM;
 				INFOPLIST_FILE = TeamYohanArd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TeamYohanArd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f773aed9-b04e-4c46-895e-71d3a668d669";
+				PROVISIONING_PROFILE_SPECIFIER = "TeamYohanArd - Dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -389,10 +415,15 @@
 			baseConfigurationReference = 79B8368439B0133AECBE02D9 /* Pods-TeamYohanArd.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeamYohanArd/TeamYohanArd.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZQ547JDPVM;
 				INFOPLIST_FILE = TeamYohanArd/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TeamYohanArd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f773aed9-b04e-4c46-895e-71d3a668d669";
+				PROVISIONING_PROFILE_SPECIFIER = "TeamYohanArd - Dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

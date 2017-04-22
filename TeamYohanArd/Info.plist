@@ -18,14 +18,28 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSPhotoLibraryUsageDescription</key>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>a858dabfd539372e262e1c8e99e68606a5fb80fb</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
-	<key>NSAppleMusicUsageDescription</key>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

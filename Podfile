@@ -11,5 +11,8 @@ target 'TeamYohanArd' do
 	pod 'Firebase/Database’
     pod 'Firebase/Auth'
     pod 'Firebase/Storage'
+    pod 'Firebase/Messaging'
+    pod 'Fabric'
+    pod 'Crashlytics'
 
 end

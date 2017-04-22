@@ -29,13 +29,15 @@ class UsersListViewController: UIViewController {
 
         ref.child("Users").observe(.childAdded, with: { (snapshot) in print ( "Added :" , snapshot)
     
+            
+            
             guard let snapshotDictionary = snapshot.value as? NSDictionary
                 else { return }
     
             let name = snapshotDictionary["name"] as? String
-            let imageURL = snapshotDictionary["imageURL"] as? String
+            let imageURL = snapshotDictionary["imageURL"] as? String ?? ""
             
-            let newUser = User(aName: name!, anImageURL: imageURL!)
+            let newUser = User(aName: name!, anImageURL: imageURL, anUid: snapshot.key)
             self.users.append(newUser)
             self.tableView.reloadData()
             })
@@ -66,22 +68,14 @@ extension UsersListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-        
-//            let dict : [String : String] = ["name" :  ]
-//            self.ref.child("Chats").child(user.uid).setValue(dict)
+
+        //get user
         let user = users[indexPath.row]
         
-        
-        let newChats = Chat(aName: user.name, anId: user.uid)
-        
-        ref.child("Chats").o
+   //     self.ref.child("Users").child(user.uid).child("messages").setValue( [Message.id : ""])
         
         let _ = self.navigationController?.popViewController(animated: true)
-        
     }
-    
-    
     
     // End of extention
 }

@@ -11,17 +11,17 @@ import Foundation
 class User {
     var name : String
     var imageURL : String
-//    var uid : String
+    var uid : String
     
     init () {
         name = ""
         imageURL = ""
-//        uid = ""
+        uid = ""
     }
     
-    init (aName : String , anImageURL : String /*, anUid : String*/) {
+    init (aName : String , anImageURL : String, anUid : String) {
         name = aName
         imageURL = anImageURL
-//        uid = anUid
+        uid = anUid
     }
 }

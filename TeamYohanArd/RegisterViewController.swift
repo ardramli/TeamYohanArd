@@ -64,7 +64,7 @@ class RegisterViewController: UIViewController {
             print("uid : \(user.uid)")
             
             //set a new value. when adding we do not need to use arrays
-            let dict : [String : Any] = ["name" :  self.nameTextField.text!]
+            let dict : [String : Any] = ["name" :  self.nameTextField.text!, "email" : self.emailTextField.text!, "display picture URL" : ""]
             self.ref.child("Users").child(user.uid).setValue(dict)
             
             if let goToViewController = self.storyboard?.instantiateViewController(withIdentifier: "ToViewNaviController") {

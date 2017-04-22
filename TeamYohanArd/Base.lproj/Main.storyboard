@@ -77,9 +77,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="userTableView" destination="wNp-Rj-UaP" id="IHP-TY-6sH"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -391,7 +388,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhk-Ko-fqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="388" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="UFu-Xw-kOw">
@@ -409,7 +406,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeW-if-DHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="869"/>
+            <point key="canvasLocation" x="388" y="869"/>
         </scene>
     </scenes>
 </document>

@@ -40,7 +40,7 @@ class ContentViewController: UIViewController {
             print("id : \(lastMessageId)")
             lastMessageId = lastMessageId + 1
             
-            let post : [String : Any] = ["message" : message]
+            let post : [String : Any] = ["text" : message]
             ref.child("messages").child("\(lastMessageId)").updateChildValues(post)
         }
         else {
@@ -52,17 +52,12 @@ class ContentViewController: UIViewController {
 
     func addMessageToArray (id : Any , messageInfo : NSDictionary) {
         
-        //let fromId = messageInfo ["fromId"] as? Int,
-        //let toId = messageInfo ["toId"] as? Int,
-        //
-        
-        
         if let text = messageInfo ["message"] as? String,
             let messageId = id as? String {
            
             let currentChatId = Int(messageId)
-            let newMessage = Message()
-            self.messages.append(newMessage)
+            //let newMessage = Message(afromId: user.uid, atoId: user.uid, aText: text, aTimeStamp: <#T##Date#>, anId: messageId)
+            //self.messages.append(newMessage)
         }
     }
     
@@ -76,11 +71,6 @@ class ContentViewController: UIViewController {
         
         //navigationItem.title = currentUser.name
         listenToFirebase()
-        
-        
-        
-        
-        
         
        
     //End of viewDidLoad
@@ -160,43 +150,78 @@ class ContentViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func dismissImagePicker(){
+    func dismissimagePicker () {
         dismiss(animated: true, completion: nil)
     }
     
-    func uploadImage(_ image: UIImage) {
-        
-        let ref = FIRStorage.storage().reference()
-        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
-        let metaData = FIRStorageMetadata()
-        ref.child("chatImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
-            
-            if let downloadPath = meta?.downloadURL()?.absoluteString {
-                //save to firebase database
-                self.saveImagePath(downloadPath)
-                
-            }
-            
-        }
-        
-    }
-    
     let dateFormat : DateFormatter = {
+        
         let _dateFormatter = DateFormatter()
         let locale = Locale(identifier: "en_US_POSIX")
         _dateFormatter.locale = locale
-        _dateFormatter.dateFormat = "yyyy'-'MM'-dd'T'HH':'mm':'ss'Z'"
+        _dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
         return _dateFormatter
     }()
     
-    func saveImagePath(_ path: String) {
-        let dbRef = FIRDatabase.database().reference()
+    func saveImagePath (downloadPath: String, referencePath: String) {
         
-        let chatValue : [String: Any] = ["name" : "ard",
-                                         "timestamp": dateFormat.string(from: Date()),
-                                         "imageURL": path]
-        dbRef.child("chats").childByAutoId().setValue(chatValue)
+        let dbRef = FIRDatabase.database().reference()
+        let chatValue : [String : Any] = [
+            "name" : "Yohan",
+            "timeStamp" : dateFormat.string(from : Date()),
+            "imageUrl" : downloadPath,
+            "referencePath" : referencePath]
+        
+        dbRef.child("chat").childByAutoId().setValue(chatValue)
     }
+    
+    func uniqueFileForUser (_ name : String) -> String {
+        
+        let currentDate = Date()
+        return"\(name)_\(currentDate.timeIntervalSince1970).jpeg"
+    }
+    
+    func uploadImage (_ image: UIImage) {
+        
+        let ref = FIRStorage.storage().reference()
+        
+        //convert image to data
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5)
+            else { return }
+        let metaData = FIRStorageMetadata ()
+        
+        metaData.contentType = "image/JPEG"
+        ref.child(uniqueFileForUser("Yohan")).put(imageData, metadata: metaData) {
+            (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString,
+                let referencePath = meta?.storageReference?.fullPath {
+                
+                //save to Firebase
+                self.saveImagePath(downloadPath: downloadPath, referencePath: referencePath)
+            }
+        }
+    }
+    
+    func downloadImage (_ reference: String) {
+        let storageRef = FIRStorage.storage().reference()
+        
+        storageRef.child(reference).data(withMaxSize: 1*102*1024) { (data, error) in _ = UIImage(data: data!)
+        }
+    }
+    
+    func observeImage () {
+        let dbRef = FIRDatabase.database().reference().child("chat")
+        dbRef.observe(.childAdded, with: { (snapshot) in
+            
+            let chatDictionary = snapshot.value as? [String: Any]
+            if let refPath = chatDictionary?["referencePath"] as? String {
+                self.downloadImage(refPath)
+            }
+        })
+    }
+
+    
 //End of ContentViewController
 }
 
@@ -204,14 +229,14 @@ extension ContentViewController : UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        //go to defer whenever exiting the function
         defer {
-            dismissImagePicker()
+            dismissimagePicker()
         }
         
-        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
-            return
-        }
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            else { return }
+        
+        //display and store
         uploadImage(image)
     }
 }
@@ -235,7 +260,6 @@ extension ContentViewController : UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
     
     // End of extention
